@@ -1,10 +1,11 @@
+from re import sub
 import sys, os
 from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog, QListWidgetItem, QWidget
-from PyQt6.QtCore import QDir
+from PyQt6.QtCore import QFile
 from PyQt6.QtGui import QIcon, QShortcut, QKeySequence
 from PyQt6 import uic
-import pypdftk
-from catQListWidgetItem import catQListWidgetItem
+import subprocess
+from catQListWidgetItem import catQListWidgetItem, PDFTK_PATH
 
 
 # Found this code through duckduckgo...
@@ -29,7 +30,7 @@ def getDocumentsPath():
     return(retval)
 
 
-# to build the pdftk command line, we need to generate aliases (i.e. A=foo.pdf B = bar.pdf ... )
+# to build the PDFTK_PATH command line, we need to generate aliases (i.e. A=foo.pdf B = bar.pdf ... )
 # For our purposes, if we go from A to ZZ, that gives us 675, which should be more than enough...
 #
 # therefore, intToAlias takes an integer & returns corresponding Alias 0 == 'A', 1 == 'B', 
@@ -356,11 +357,10 @@ class pyPDFTKbuilder(QMainWindow):
             # ranges list of page range for each PDF file (in desired order)
             # input_pws dictionary (mapping handle to password)
             #
-            # now, we use these to construct a 'pdftk <input PDF Files> cat <page ranges> output out.pdf' command...
+            # now, we use these to construct a
+            # 'pdftk <input PDF Files> <input_pw> cat|shuffle <page ranges> output out.pdf' command...
             #
-            # Note: pypdftk.concat() function is *SEVERELY* crippled...Going to have to build command line ourself...
-            # pypdftk.concat(files, out_file_name)
-            cmd = [pypdftk.PDFTK_PATH]
+            cmd = [PDFTK_PATH]
             for f in list(pdf2Handles):
                 cmd.extend([f"{pdf2Handles[f]}={f}"])
             if len(input_pws) > 0:
@@ -377,7 +377,7 @@ class pyPDFTKbuilder(QMainWindow):
                 i = i + 1
             cmd.extend(['output', output])
             try:
-                cmd_output = pypdftk.run_command(cmd)
+                cmd_output = subprocess.check_output(cmd).decode("utf-8")
                 self.ui.statusbar.showMessage(f"Saved [{output}]", 7000)
             except:
                 self.ui.statusbar.showMessage(f"Error saving {output}", 7000)
@@ -443,9 +443,12 @@ class pyPDFTKbuilder(QMainWindow):
     def burstPdfFile(self):
         fname = self.ui.burstPdfLabel.text()
         out_pattern = f"{os.path.dirname(fname)}/{os.path.basename(fname)}_%03d.pdf"
-        cmd = [pypdftk.PDFTK_PATH, fname, 'burst', 'output', out_pattern]
+        cmd = [PDFTK_PATH, fname, 'burst', 'output', out_pattern]
         try:
-            cmd_output = pypdftk.run_command(cmd)
+            cmd_output = subprocess.check_output(cmd).decode("utf-8")
+            tmp_file = QFile("doc_data.txt")
+            if tmp_file.exists():
+                tmp_file.remove()
             self.ui.statusbar.showMessage(f"Saved [{fname}]", 7000)
         except:
             self.ui.statusbar.showMessage(f"Error saving {fname}", 7000)

@@ -21,6 +21,7 @@ class DropPDFQListWidget(QListWidget):
     def __init__(self, parent):
         super().__init__(parent)
         self.setDragDropMode(QListWidget.DragDropMode.DropOnly)
+        self.setAlternatingRowColors(True)
 
 
     def dragEnterEvent(self, e):
