@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg844"
+   sodipodi:docname="reshot-icon-reset.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs848" />
+  <sodipodi:namedview
+     id="namedview846"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="76.166667"
+     inkscape:cx="12"
+     inkscape:cy="12"
+     inkscape:window-width="3840"
+     inkscape:window-height="2066"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg844" />
+  <title
+     id="title837">Artboard-169</title>
+  <g
+     id="Refresh_Time"
+     data-name="Refresh Time">
+    <path
+       d="M12,2A9.975,9.975,0,0,0,5,4.882V3A1,1,0,0,0,3,3V7A1,1,0,0,0,4,8H8A1,1,0,0,0,8,6H6.713A8,8,0,1,1,4,12a1,1,0,0,0-2,0A10,10,0,1,0,12,2Z"
+       style="fill:#1c1b1e"
+       id="path839" />
+  </g>
+  <metadata
+     id="metadata930">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Artboard-169</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

@@ -66,6 +66,7 @@ class pyPDFTKbuilder(QMainWindow):
         self.ui.mBottom_pushButton.clicked.connect(self.mBottom)
         self.ui.copy_pushButton.clicked.connect(self.copy)
         self.ui.shuffleCat_pushButton.clicked.connect(self.shuffleCatToggle)
+        self.ui.splitClearPushButton.clicked.connect(self.splitClear)
 
         # Add code to the Menu Actions...
         self.ui.actionJoin_Files.triggered.connect(self.switchTabJoin)
@@ -122,12 +123,15 @@ class pyPDFTKbuilder(QMainWindow):
         self.ui.sort_pushButton.setText("")
         self.ui.copy_pushButton.setIcon(QIcon("icons/copy.svg"))
         self.ui.copy_pushButton.setText("")
+        self.ui.splitClearPushButton.setIcon(QIcon("icons/reshot-icon-reset.svg"))
+        self.ui.splitClearPushButton.setText("")
 
         # Define some keyboard shortcuts...
         self.delShortcut = QShortcut(QKeySequence('Del'), self.ui.join_listWidget)
         self.delShortcut.activated.connect(self.removeItem)
         self.escShortcut = QShortcut(QKeySequence('Esc'), self.ui.join_listWidget)
         self.escShortcut.activated.connect(self.escPressed)
+
 
 
     def joinFilesAdd(self):
@@ -489,6 +493,11 @@ class pyPDFTKbuilder(QMainWindow):
 
     def escPressed(self):
         self.join_listWidget.setCurrentRow(-1)
+    
+
+    def splitClear(self):
+        self.ui.burstPdfLabel.setText("")
+        self.ui.burstPdfSavePushButton.setEnabled(False)
 
 
 
