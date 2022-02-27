@@ -45,7 +45,7 @@
                 <string>Drag &amp; Drop PDF files to process to this area...</string>
                </property>
                <property name="styleSheet">
-                <string notr="true">border : 3px dashed blue</string>
+                <string notr="true">#join_listWidget {border : 2px dashed blue}</string>
                </property>
               </widget>
              </item>
@@ -289,12 +289,12 @@
          </widget>
         </item>
         <item>
-         <widget class="DropPDFQFrame" name="frame">
+         <widget class="DropPDFQFrame" name="splitDragDropFrame">
           <property name="toolTip">
            <string>Drag &amp; drop a PDF file to split into this area...</string>
           </property>
           <property name="styleSheet">
-           <string notr="true">border : 3px dashed blue;</string>
+           <string notr="true">#splitDragDropFrame {border : 2px dashed blue}</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -316,15 +316,12 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="DropPDFQLabel" name="burstPdfLabel">
+            <widget class="QLabel" name="burstPdfLabel">
              <property name="font">
               <font>
                <pointsize>16</pointsize>
                <bold>true</bold>
               </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border: 0</string>
              </property>
              <property name="text">
               <string>foo</string>
@@ -786,11 +783,6 @@
    <class>DropPDFQListWidget</class>
    <extends>QListWidget</extends>
    <header>DropPDFQListWidget</header>
-  </customwidget>
-  <customwidget>
-   <class>DropPDFQLabel</class>
-   <extends>QLabel</extends>
-   <header>DropPDFQLabel</header>
   </customwidget>
   <customwidget>
    <class>DropPDFQFrame</class>

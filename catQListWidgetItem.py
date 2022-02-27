@@ -41,7 +41,6 @@ class catQListWidgetItem(QWidget):
     def __init__(self, fname):
         super(catQListWidgetItem, self).__init__()
         self.setupUi(fname)
-        self.setStyleSheet("border : 0px;")
 
     def setupUi(self, fname):
         self.setGeometry(QRect(10, 10, 631, 23))
