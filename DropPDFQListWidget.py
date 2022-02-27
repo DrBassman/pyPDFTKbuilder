@@ -1,4 +1,3 @@
-#!/usr/bin/python
 """
 Updated for PyQt6 & creating QListWidget subclass
 Drop only accepts PDF file URLs.
