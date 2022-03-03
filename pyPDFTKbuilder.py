@@ -1,10 +1,9 @@
 from re import sub
 import sys, os
 from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog, QListWidgetItem, QWidget
-from PyQt6.QtCore import QFile
+from PyQt6.QtCore import QProcess
 from PyQt6.QtGui import QIcon, QShortcut, QKeySequence
 from PyQt6 import uic
-import subprocess
 from catQListWidgetItem import catQListWidgetItem, PDFTK_PATH
 
 
@@ -380,12 +379,15 @@ class pyPDFTKbuilder(QMainWindow):
                 cmd.extend([f"{pdf2Handles[files[i]]}{ranges[i]}"])
                 i = i + 1
             cmd.extend(['output', output])
-            try:
-                cmd_output = subprocess.check_output(cmd).decode("utf-8")
+            proc = QProcess()
+            proc.start(cmd[0], cmd[1:])
+            while not proc.waitForFinished(-1):
+                pass
+            if proc.exitStatus() == QProcess.ExitStatus.NormalExit:
                 self.ui.statusbar.showMessage(f"Saved [{output}]", 7000)
-            except:
+            else:
                 self.ui.statusbar.showMessage(f"Error saving {output}", 7000)
-                print(cmd_output, file=sys.stderr)
+                print(bytes(proc.readAllStandardError()).decode("utf8"), file=sys.stderr)
 
 
     def sortJoin_listWidget(self):
@@ -448,16 +450,16 @@ class pyPDFTKbuilder(QMainWindow):
         fname = self.ui.burstPdfLabel.text()
         out_pattern = f"{os.path.dirname(fname)}/{os.path.basename(fname)}_%03d.pdf"
         cmd = [PDFTK_PATH, fname, 'burst', 'output', out_pattern]
-        try:
-            cmd_output = subprocess.check_output(cmd).decode("utf-8")
-            tmp_file = QFile("doc_data.txt")
-            if tmp_file.exists():
-                tmp_file.remove()
+        proc = QProcess()
+        proc.start(cmd[0], cmd[1:])
+        while not proc.waitForFinished(-1):
+            pass
+        if proc.exitStatus() == QProcess.ExitStatus.NormalExit:
             self.ui.statusbar.showMessage(f"Saved [{fname}]", 7000)
-        except:
+        else:
             self.ui.statusbar.showMessage(f"Error saving {fname}", 7000)
-            print(cmd_output, file=sys.stderr)
-    
+            print(bytes(proc.readAllStandardError()).decode("utf8"), file=sys.stderr)
+
 
     def mTop(self):
         self.move_item("top")

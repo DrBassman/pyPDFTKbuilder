@@ -8,10 +8,9 @@
 
 from re import sub
 from PyQt6 import QtWidgets
-from PyQt6.QtCore import QRect, QSize, QMetaObject
+from PyQt6.QtCore import QRect, QSize, QProcess
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QLabel, QLineEdit, QComboBox, QApplication
 import sys
-import subprocess
 from PyPDF4 import PdfFileReader
 
 
@@ -27,10 +26,14 @@ def pdf_num_pages(pdf):
     except:
         # If PyPDF4 library fails, try to get number of pages using pypdftk command...
         try:
-            r = subprocess.check_output([f"{PDFTK_PATH}", f"{pdf}",  "dump_data"])
-            for line in r.decode("utf-8").splitlines():
-                if line.lower().startswith("numberofpages"):
-                    retval = f"{int(line.split(':')[1])} Pages"
+            proc = QProcess()
+            proc.start(f"{PDFTK_PATH}", [f"{pdf}", "dump_data"])
+            while not proc.waitForFinished(-1):
+                pass
+            if proc.exitStatus() == QProcess.ExitStatus.NormalExit:
+                for line in bytes(proc.readAllStandardOutput()).decode("utf8").splitlines():
+                    if line.lower().startswith("numberofpages"):
+                        retval = f"{int(line.split(':')[1])} Pages"
         except:
         # If both libs fail, 'give up'...
             retval = '<unknown> Pages'
