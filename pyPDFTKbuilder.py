@@ -53,6 +53,7 @@ class pyPDFTKbuilder(QMainWindow):
 
         # Add code to the QPushButtons...
         self.ui.add_pushButton.clicked.connect(self.joinFilesAdd)
+        self.ui.join_listWidget.clicked.connect(self.joinFilesAdd)
         self.ui.remove_pushButton.clicked.connect(self.removeItem)
         self.ui.mUp_pushButton.clicked.connect(self.mUp)
         self.ui.mDown_pushButton.clicked.connect(self.mDown)
@@ -74,9 +75,6 @@ class pyPDFTKbuilder(QMainWindow):
 
         # Do something if listWidget selection changes...
         self.ui.join_listWidget.currentRowChanged.connect(self.join_itemChanged)
-
-        # Hide the custom permissions by default...
-        self.ui.protectionWidget.hide()
 
         # Blank out the burstPdfLabel ...
         self.ui.burstPdfLabel.setText("")
@@ -332,7 +330,6 @@ class pyPDFTKbuilder(QMainWindow):
             # Get the list of files from the listWidget...
             i = 0
             pdf2Handles = {}
-            input_pws = {}
             ranges = []
             outputOpts = []
             inputAlias = 0
@@ -340,11 +337,8 @@ class pyPDFTKbuilder(QMainWindow):
                 listWidgetItem = self.ui.join_listWidget.item(i)
                 listWidgetItemWidget = self.ui.join_listWidget.itemWidget(listWidgetItem)
                 pdfName = listWidgetItemWidget.pdfNameLabel.text()
-                pdfPasswd = listWidgetItemWidget.pdfPasswordLineEdit.text()
                 if pdfName not in pdf2Handles:
                     pdf2Handles[pdfName] = intToAlias(inputAlias)
-                    if len(pdfPasswd) > 0:
-                        input_pws[pdf2Handles[pdfName]] = pdfPasswd
                     inputAlias = inputAlias + 1
                 pages = listWidgetItemWidget.pagesLineEdit.text()
                 if not len(pages):
@@ -366,10 +360,6 @@ class pyPDFTKbuilder(QMainWindow):
             cmd = [PDFTK_PATH]
             for f in list(pdf2Handles):
                 cmd.extend([f"{pdf2Handles[f]}={f}"])
-            if len(input_pws) > 0:
-                cmd.extend(["input_pw"])
-            for handle in list(input_pws):
-                cmd.extend([f"{handle}={input_pws[handle]}"])
             if self.ui.shuffleCat_pushButton.isChecked():
                 cmd.extend(['shuffle'])
             else:
