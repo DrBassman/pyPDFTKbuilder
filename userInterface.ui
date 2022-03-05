@@ -42,7 +42,7 @@
              <item>
               <widget class="DropPDFQListWidget" name="join_listWidget">
                <property name="toolTip">
-                <string>Click Here or Drag &amp; Drop to add PDF files this area...</string>
+                <string>Drag &amp; Drop PDF files this area to be processed...</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">#join_listWidget {border : 2px dashed blue}</string>
