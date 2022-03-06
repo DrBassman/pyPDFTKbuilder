@@ -1,7 +1,7 @@
 from re import sub
 import sys, os
-from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog, QListWidgetItem, QWidget
-from PyQt6.QtCore import QProcess
+from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog, QListWidgetItem, QWidget, QMessageBox
+from PyQt6.QtCore import QProcess, Qt
 from PyQt6.QtGui import QIcon, QShortcut, QKeySequence
 from PyQt6 import uic
 from catQListWidgetItem import catQListWidgetItem, PDFTK_PATH
@@ -128,6 +128,9 @@ class pyPDFTKbuilder(QMainWindow):
         self.delShortcut.activated.connect(self.removeItem)
         self.escShortcut = QShortcut(QKeySequence('Esc'), self.ui.join_listWidget)
         self.escShortcut.activated.connect(self.escPressed)
+
+        self.ui.actionAbout.triggered.connect(self.helpAbout)
+        self.ui.actionAbout_Qt.triggered.connect(self.helpAboutQt)
 
 
 
@@ -490,6 +493,31 @@ class pyPDFTKbuilder(QMainWindow):
     def splitClear(self):
         self.ui.burstPdfLabel.setText("")
         self.ui.burstPdfSavePushButton.setEnabled(False)
+
+
+    def helpAbout(self):
+        text = '\
+            pyPDFTKbuilder, a PyQt6 rewrite of\
+            <a href="http://www.angusj.com/pdftkb/">PDFTKBuilder</a>\
+            <br><br>Copyright 2022 Ryan Losh, ALL RIGHTS RESERVED\
+            <br><br>This program is free software: you can redistribute it and/or modify\
+            it under the terms of the GNU General Public License as published by\
+            the Free Software Foundation, either version 3 of the License.\
+            <br><br>This program is distributed in the hope that it will be useful,\
+            but WITHOUT ANY WARRANTY; without even the implied warranty of\
+            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\
+            GNU General Public License for more details.\
+            <br><br>You should have received a copy of the GNU General Public License\
+            along with this program.  If not, see <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/.</a>\
+            <br><br>pyPDFTKbuilder is licensed under GNU GPLv3.\
+            <br><br>Yet another graphical interface for the open source\
+            <a href="https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/">PDFtk</a>\
+        '
+        QMessageBox.about(self, "pyPDFTKbuilder", text)
+
+
+    def helpAboutQt(self):
+        QMessageBox.aboutQt(self, "pyPDFTKbuilder")
 
 
 
