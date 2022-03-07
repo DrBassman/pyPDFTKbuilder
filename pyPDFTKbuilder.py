@@ -53,7 +53,6 @@ class pyPDFTKbuilder(QMainWindow):
 
         # Add code to the QPushButtons...
         self.ui.add_pushButton.clicked.connect(self.joinFilesAdd)
-        self.ui.join_listWidget.clicked.connect(self.joinFilesAdd)
         self.ui.remove_pushButton.clicked.connect(self.removeItem)
         self.ui.mUp_pushButton.clicked.connect(self.mUp)
         self.ui.mDown_pushButton.clicked.connect(self.mDown)
@@ -346,8 +345,8 @@ class pyPDFTKbuilder(QMainWindow):
                 pages = listWidgetItemWidget.pagesLineEdit.text()
                 if not len(pages):
                     pages = "1-end"
-                qualifier = listWidgetItemWidget.selPagesComboBox.currentText()
-                rotation = listWidgetItemWidget.rotateComboBox.currentText()
+                qualifier = listWidgetItemWidget.selPagesComboBox.currentData()
+                rotation = listWidgetItemWidget.rotateComboBox.currentData()
                 files.extend([pdfName])
                 ranges.extend([f"{pages}{qualifier}{rotation}"])
                 i = i + 1
