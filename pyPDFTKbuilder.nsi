@@ -15,6 +15,10 @@ Section
     File /r dist\pyPDFTKbuilder\*
 #    SetOutPath $INSTDIR\pyPDFTKbuilder
     CreateShortCut $SMPROGRAMS\pyPDFTKbuilder.lnk $INSTDIR\pyPDFTKbuilder.exe parameters $INSTDIR\icons\reshot-pdf-swissKnife.ico
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\pyPDFTKbuilder" "DisplayName" "pyPDFTKbuilder - a Python QT6 interface to PDFTK"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\pyPDFTKbuilder" "Publisher" "Ryan Losh"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\pyPDFTKbuilder" "UninstallString" "$\"$INSTDIR\Uninstall.exe$\""
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\pyPDFTKbuilder" "QuietUninstallString" "$\"$INSTDIR\Uninstall.exe$\" /S"
     WriteUninstaller $INSTDIR\Uninstall.exe
 SectionEnd
 
@@ -28,5 +32,6 @@ Section "Uninstall"
         Delete $INSTDIR\Uninstall.exe
         Delete $SMPROGRAMS\pyPDFTKbuilder.lnk
         RMDir /r /REBOOTOK $INSTDIR
+        DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\pyPDFTKbuilder"
     next:
 SectionEnd

@@ -1,12 +1,15 @@
 from re import sub
 import sys, os
 from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog, QListWidgetItem, QWidget, QMessageBox
-from PyQt6.QtCore import QProcess, Qt
+from PyQt6.QtCore import QProcess, QCoreApplication, QSettings
 from PyQt6.QtGui import QIcon, QShortcut, QKeySequence
 from PyQt6 import uic
 from catQListWidgetItem import catQListWidgetItem, PDFTK_PATH
 
 
+QCoreApplication.setApplicationName("pyPDFTKbuilder")
+QCoreApplication.setOrganizationDomain("losh.com")
+QCoreApplication.setOrganizationName("Losh Optometry")
 # Found this code through duckduckgo...
 # Find the MyDocuments directory
 # should be portable across Windows Linux FreeBSD, MacOS, etc.
@@ -50,6 +53,11 @@ class pyPDFTKbuilder(QMainWindow):
         # set icon...
         self.setWindowIcon(QIcon("icons/reshot-pdf-swissKnife.svg"))
         self.ui = uic.loadUi("userInterface.ui", self)
+        self.settings = QSettings()
+
+        # Keep track of window last position between runs...
+        if self.settings.contains("geometry"):
+            self.restoreGeometry(self.settings.value("geometry"))
 
         # Add code to the QPushButtons...
         self.ui.add_pushButton.clicked.connect(self.joinFilesAdd)
@@ -517,6 +525,12 @@ class pyPDFTKbuilder(QMainWindow):
 
     def helpAboutQt(self):
         QMessageBox.aboutQt(self, "pyPDFTKbuilder")
+
+
+    def closeEvent(self, event):
+        # keep track of window position between runs...
+        self.settings.setValue("geometry", self.saveGeometry())
+        event.accept()
 
 
 
