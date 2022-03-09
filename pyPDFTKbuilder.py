@@ -1,4 +1,3 @@
-from re import sub
 import sys, os
 from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog, QListWidgetItem, QWidget, QMessageBox
 from PyQt6.QtCore import QProcess, QCoreApplication, QSettings
