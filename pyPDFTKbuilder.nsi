@@ -3,6 +3,7 @@ Name "pyPDFTKbuilder setup"
 #SetCompressor /SOLID zlib|bzip2|lzma
 SetCompressor /SOLID lzma
 Outfile "pyPDFTKb_install.exe"
+Icon "icons\reshot-pdf-swissKnife.ico"
 InstallDir $PROGRAMFILES64\pyPDFTKbuilder
 DirText "Install pyPDFTKbuilder on your computer" "" "Browse" "Select directory into which to install pyPDFTKbuilder"
 
