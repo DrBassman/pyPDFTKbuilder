@@ -138,6 +138,10 @@ class pyPDFTKbuilder(QMainWindow):
         self.ui.actionAbout.triggered.connect(self.helpAbout)
         self.ui.actionAbout_Qt.triggered.connect(self.helpAboutQt)
 
+        # chdir to Documents directory...
+        os.chdir(getDocumentsPath())
+
+
 
 
     def joinFilesAdd(self):
