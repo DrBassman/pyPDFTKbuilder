@@ -14,7 +14,7 @@ import sys
 from PyPDF4 import PdfFileReader
 
 
-PDFTK_PATH="PDFtk Server/pdftk.exe"
+PDFTK_PATH="/usr/bin/pdftk"
 
 
 def pdf_num_pages(pdf):

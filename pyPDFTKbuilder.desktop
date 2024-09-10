@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=pyPDFTKbuilder
+Comment=Qt6 interface to pdftk
+Exec=/opt/pyPDFTKbuilder/pyPDFTKbuilder.sh
+Icon=/opt/pyPDFTKbuilder/icons/reshot-pdf-swissKnife.svg
+Type=Application
+Categories=Office
