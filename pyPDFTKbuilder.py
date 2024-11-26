@@ -53,10 +53,17 @@ class pyPDFTKbuilder(QMainWindow):
         self.setWindowIcon(QIcon("icons/reshot-pdf-swissKnife.svg"))
         self.ui = uic.loadUi("userInterface.ui", self)
         self.settings = QSettings()
+        self.workingDir = ""
 
         # Keep track of window last position between runs...
         if self.settings.contains("geometry"):
             self.restoreGeometry(self.settings.value("geometry"))
+        
+        # Keep track of working directory...
+        if self.settings.contains("workingDir"):
+            self.workingDir = self.settings.value("workingDir")
+        else:
+            self.settings.setValue("workingDir", getDocumentsPath())    
 
         # Add code to the QPushButtons...
         self.ui.add_pushButton.clicked.connect(self.joinFilesAdd)
@@ -139,13 +146,13 @@ class pyPDFTKbuilder(QMainWindow):
         self.ui.actionAbout_Qt.triggered.connect(self.helpAboutQt)
 
         # chdir to Documents directory...
-        os.chdir(getDocumentsPath())
+        os.chdir(self.workingDir)
 
 
 
 
     def joinFilesAdd(self):
-        fnames = QFileDialog.getOpenFileNames(self, "Add These Files", getDocumentsPath(), "PDF files (*.pdf)")[0]
+        fnames = QFileDialog.getOpenFileNames(self, "Add These Files", self.workingDir, "PDF files (*.pdf)")[0]
         if len(fnames):
             self.ui.join_listWidget.addItems(fnames)
             if not self.ui.saveAs_pushButton.isEnabled():
@@ -154,6 +161,10 @@ class pyPDFTKbuilder(QMainWindow):
                 self.ui.sort_pushButton.setEnabled(True)
             if not self.ui.clear_pushButton.isEnabled():
                 self.ui.clear_pushButton.setEnabled(True)
+            self.workingDir = os.path.dirname(fnames[0])
+            self.settings.setValue("workingDir", self.workingDir)
+            print (self.workingDir)
+            os.chdir(self.workingDir)
 
 
     def join_itemChanged(self, new_row):
@@ -443,10 +454,13 @@ class pyPDFTKbuilder(QMainWindow):
     
 
     def burstFileSelect(self):
-        fname = QFileDialog.getOpenFileName(self, "Add These Files", getDocumentsPath(), "PDF files (*.pdf)")[0]
+        fname = QFileDialog.getOpenFileName(self, "Add These Files", self.workingDir, "PDF files (*.pdf)")[0]
         if len(fname):
             self.ui.burstPdfLabel.setText(fname)
             self.ui.burstPdfSavePushButton.setEnabled(True)
+            self.workingDir = os.path.dirname(fname)
+            self.settings.setValue("workingDir", self.workingDir)
+            os.chdir(self.workingDir)
 
 
     def burstPdfFile(self):
