@@ -15,7 +15,7 @@ Section
     # define what to install and place it in the output path
     File /r dist\pyPDFTKbuilder\*
 #    SetOutPath $INSTDIR\pyPDFTKbuilder
-    CreateShortCut $SMPROGRAMS\pyPDFTKbuilder.lnk $INSTDIR\pyPDFTKbuilder.exe parameters $INSTDIR\icons\reshot-pdf-swissKnife.ico
+    CreateShortCut $SMPROGRAMS\pyPDFTKbuilder.lnk $INSTDIR\pyPDFTKbuilder.exe parameters $INSTDIR\_internal\icons\reshot-pdf-swissKnife.ico
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\pyPDFTKbuilder" "DisplayName" "pyPDFTKbuilder - a Python QT6 interface to PDFTK"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\pyPDFTKbuilder" "Publisher" "Ryan Losh"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\pyPDFTKbuilder" "UninstallString" "$\"$INSTDIR\Uninstall.exe$\""

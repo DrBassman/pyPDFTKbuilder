@@ -11,10 +11,10 @@ from PyQt6 import QtWidgets
 from PyQt6.QtCore import QRect, QSize, QProcess
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QLabel, QLineEdit, QComboBox, QApplication
 import sys
+import os
 from PyPDF4 import PdfFileReader
 
-
-PDFTK_PATH="/usr/bin/pdftk"
+PDFTK_PATH =  os.path.abspath(os.path.join(os.path.dirname(__file__), 'PDFtk Server', 'pdftk.exe'))
 
 
 def pdf_num_pages(pdf):

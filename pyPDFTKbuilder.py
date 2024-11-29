@@ -50,8 +50,8 @@ class pyPDFTKbuilder(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(pyPDFTKbuilder, self).__init__(*args, **kwargs)
         # set icon...
-        self.setWindowIcon(QIcon("icons/reshot-pdf-swissKnife.svg"))
-        self.ui = uic.loadUi("userInterface.ui", self)
+        self.setWindowIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/reshot-pdf-swissKnife.svg"))))
+        self.ui = uic.loadUi(os.path.abspath(os.path.join(os.path.dirname(__file__), "userInterface.ui")), self)
         self.settings = QSettings()
         self.workingDir = ""
 
@@ -93,47 +93,31 @@ class pyPDFTKbuilder(QMainWindow):
         self.ui.burstPdfLabel.setText("")
 
         # Change up & down buttons to icons...
-        self.ui.mTop_pushButton.setIcon(QIcon("icons/up-block-bracket.svg"))
+        self.ui.mTop_pushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/up-block-bracket.svg"))))
         self.ui.mTop_pushButton.setText("")
-        #self.ui.mUp_pushButton.setIcon(self.style().standardIcon(getattr(QStyle.StandardPixmap, 'SP_ArrowUp')))
-        #self.ui.mUp_pushButton.setIcon(QIcon.fromTheme("go-up"))
-        self.ui.mUp_pushButton.setIcon(QIcon("icons/up-block.svg"))
+        self.ui.mUp_pushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/up-block.svg"))))
         self.ui.mUp_pushButton.setText("")
-        #self.ui.mDown_pushButton.setIcon(self.style().standardIcon(getattr(QStyle.StandardPixmap, 'SP_ArrowDown')))
-        #self.ui.mDown_pushButton.setIcon(QIcon.fromTheme("go-down"))
-        self.ui.mDown_pushButton.setIcon(QIcon("icons/down-block.svg"))
+        self.ui.mDown_pushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/down-block.svg"))))
         self.ui.mDown_pushButton.setText("")
-        self.ui.mBottom_pushButton.setIcon(QIcon("icons/down-block-bracket.svg"))
+        self.ui.mBottom_pushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/down-block-bracket.svg"))))
         self.ui.mBottom_pushButton.setText("")
-        #self.ui.add_pushButton.setIcon(self.style().standardIcon(getattr(QStyle.StandardPixmap, 'SP_FileDialogStart')))
-        #self.ui.add_pushButton.setIcon(QIcon.fromTheme("document-open"))
-        self.ui.add_pushButton.setIcon(QIcon("icons/plus-green.svg"))
+        self.ui.add_pushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/plus-green.svg"))))
         self.ui.add_pushButton.setText("")
-        #self.ui.remove_pushButton.setIcon(self.style().standardIcon(getattr(QStyle.StandardPixmap, 'SP_DialogDiscardButton')))
-        #self.ui.remove_pushButton.setIcon(QIcon.fromTheme("edit-delete"))
-        self.ui.remove_pushButton.setIcon(QIcon("icons/minus-red.svg"))
+        self.ui.remove_pushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/minus-red.svg"))))
         self.ui.remove_pushButton.setText("")
-        #self.ui.clear_pushButton.setIcon(self.style().standardIcon(getattr(QStyle.StandardPixmap, 'SP_TrashIcon')))
-        #self.ui.clear_pushButton.setIcon(QIcon.fromTheme("edit-clear"))
-        self.ui.clear_pushButton.setIcon(QIcon("icons/small-brush.svg"))
+        self.ui.clear_pushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/small-brush.svg"))))
         self.ui.clear_pushButton.setText("")
-        #self.ui.saveAs_pushButton.setIcon(self.style().standardIcon(getattr(QStyle.StandardPixmap, 'SP_DialogSaveButton')))
-        #self.ui.saveAs_pushButton.setIcon(QIcon.fromTheme("document-save-as"))
-        self.ui.saveAs_pushButton.setIcon(QIcon("icons/file-pdf.svg"))
+        self.ui.saveAs_pushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/file-pdf.svg"))))
         self.ui.saveAs_pushButton.setText("")
-        #self.ui.burstPdfSourcePushButton.setIcon(self.style().standardIcon(getattr(QStyle.StandardPixmap, 'SP_FileDialogStart')))
-        #self.ui.burstPdfSourcePushButton.setIcon(QIcon.fromTheme("document-open"))
-        self.ui.burstPdfSourcePushButton.setIcon(QIcon("icons/file-pdf.svg"))
+        self.ui.burstPdfSourcePushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/file-pdf.svg"))))
         self.ui.burstPdfSourcePushButton.setText("")
-        #self.ui.burstPdfSavePushButton.setIcon(self.style().standardIcon(getattr(QStyle.StandardPixmap, 'SP_DialogSaveButton')))
-        #self.ui.burstPdfSavePushButton.setIcon(QIcon.fromTheme("document-save-as"))
-        self.ui.burstPdfSavePushButton.setIcon(QIcon("icons/file-pdf.svg"))
+        self.ui.burstPdfSavePushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/file-pdf.svg"))))
         self.ui.burstPdfSavePushButton.setText("")
-        self.ui.sort_pushButton.setIcon(QIcon("icons/sort.svg"))
+        self.ui.sort_pushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/sort.svg"))))
         self.ui.sort_pushButton.setText("")
-        self.ui.copy_pushButton.setIcon(QIcon("icons/copy.svg"))
+        self.ui.copy_pushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/copy.svg"))))
         self.ui.copy_pushButton.setText("")
-        self.ui.splitClearPushButton.setIcon(QIcon("icons/reshot-icon-reset.svg"))
+        self.ui.splitClearPushButton.setIcon(QIcon(os.path.abspath(os.path.join(os.path.dirname(__file__), "icons/reshot-icon-reset.svg"))))
         self.ui.splitClearPushButton.setText("")
 
         # Define some keyboard shortcuts...
@@ -163,7 +147,6 @@ class pyPDFTKbuilder(QMainWindow):
                 self.ui.clear_pushButton.setEnabled(True)
             self.workingDir = os.path.dirname(fnames[0])
             self.settings.setValue("workingDir", self.workingDir)
-            print (self.workingDir)
             os.chdir(self.workingDir)
 
 
@@ -381,6 +364,7 @@ class pyPDFTKbuilder(QMainWindow):
             # now, we use these to construct a
             # 'pdftk <input PDF Files> <input_pw> cat|shuffle <page ranges> output out.pdf' command...
             #
+            print(PDFTK_PATH)
             cmd = [PDFTK_PATH]
             for f in list(pdf2Handles):
                 cmd.extend([f"{pdf2Handles[f]}={f}"])
