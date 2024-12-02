@@ -14,7 +14,12 @@ import sys
 import os
 from PyPDF4 import PdfFileReader
 
-PDFTK_PATH =  os.path.abspath(os.path.join(os.path.dirname(__file__), 'PDFtk Server', 'pdftk.exe'))
+if os.name == "nt":
+    PDFTK_PATH =  os.path.abspath(os.path.join(os.path.dirname(__file__), 'PDFtk Server', 'pdftk.exe'))
+elif os.name == "posix":
+    PDFTK_PATH = "/usr/local/bin/pdftk"
+else:
+    PDFTK_PATH = ""
 
 
 def pdf_num_pages(pdf):
