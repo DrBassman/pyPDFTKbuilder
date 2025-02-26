@@ -136,7 +136,7 @@ class pyPDFTKbuilder(QMainWindow):
 
 
     def joinFilesAdd(self):
-        fnames = QFileDialog.getOpenFileNames(self, "Add These Files", self.workingDir, "PDF files (*.pdf)")[0]
+        fnames = QFileDialog.getOpenFileNames(self, "Add These Files", self.workingDir, "PDF files (*.pdf *.PDF *.pdF *.pDf *.Pdf *.pDF *.PdF *.PDf)")[0]
         if len(fnames):
             self.ui.join_listWidget.addItems(fnames)
             if not self.ui.saveAs_pushButton.isEnabled():
